@@ -55,7 +55,16 @@ public class BaffaAlg : MonoBehaviour
         throw new System.Exception("BaffaAlg = null");
     }
 
-
+    /* *************************************************************************************
+     * private void FindLeader()
+     *      Given a current quest, finds a list of the best quest for this particular group
+     *      of players
+     *       
+     * Parameters
+     *      QuestManager.Quest currentQuest - The current active quest.
+     * Return
+     *      sampleSpace[randomQuest].questID - The id of the next quest to become active
+     * *************************************************************************************/
     public int GetBestQuest(QuestManager.Quest currentQuest)
     {
         UpdatePlayers();
@@ -196,6 +205,17 @@ public class BaffaAlg : MonoBehaviour
         print("SampleSpace.count = " + sampleSpace.Count);
         return sampleSpace;
     }
+    
+    /* *************************************************************************************
+     * private void FindLeader()
+     *      This method updates the current leader of the players by going through each player
+     *      and summing up the empathy level with each other player.
+     *       
+     * Parameters
+     * 
+     * Return
+     *  
+     * *************************************************************************************/
     private void FindLeader()
     {
         float maxSum = -65535;
