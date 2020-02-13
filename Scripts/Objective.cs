@@ -11,17 +11,17 @@ public class Objective : MonoBehaviour
     }
     
     /******************************************
-	* 
-	* private void OnTriggerEnter2D(Collider2D collision)
-	*		If the objective collides with a player object, signals the ScenarioManager to check for a new Scenario
+    * 
+    * private void OnTriggerEnter2D(Collider2D collision)
+    *	If the objective collides with a player object, signals the ScenarioManager to check for a new Scenario
     *       and destroys the objective gameObject
-	*
-	* Parameters
-	*       Collider2D collison - Unity default parameter       
     *
-	* Return
-	*
-	* ***************************************/
+    * Parameters
+    *       Collider2D collison - Unity default parameter       
+    *
+    * Return
+    *
+    * ***************************************/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.isTrigger)
