@@ -71,6 +71,18 @@ public class GameManagerScript : MonoBehaviour {
         }
 	}
 
+    /******************************************
+    * 
+    * public void NewPlayer()
+    *		Creates a new player with the current playerID value,
+    *		signals the other managers to insert a new player on their player list,
+    *		sets the BFGI questionnaire back to 1;
+    *
+    * Parameters
+    *
+    * Return
+    *
+    * ***************************************/	
     public void NewPlayer()
     {
         GameObject newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
@@ -85,13 +97,26 @@ public class GameManagerScript : MonoBehaviour {
         newPlayerId++;
         BFGIManager.GetInstance().LoadSituation(1);
     }
+
+    /******************************************
+    * 
+    * public void NewPlayer(int playerID)
+    *		Creates a new player with a specified playerID value,
+    *		signals the other managers to insert a new player on their player list,
+    *		sets the BFGI questionnaire back to 1;
+    *
+    * Parameters
+    *		int playerID - The number ID for the new player.
+    * Return
+    *
+    * ***************************************/		
     private void NewPlayer(int playerID)
     {
         GameObject newPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
         newPlayer.name = "Player_" + playerID;
         newPlayer.GetComponent<PlayerMovementScript>().playerID = playerID;
-        //newPlayer.GetComponent<MeshRenderer>().material.color = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+        newPlayer.GetComponent<MeshRenderer>().material.color = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
         newPlayer.tag = GameManagerScript.Tags.Player.ToString();
         players.Add(newPlayer);
 
@@ -101,12 +126,22 @@ public class GameManagerScript : MonoBehaviour {
         UIManagerScript.GetInstance().StartDisplayOnScreen(newPlayer,"PlayerName_"+newPlayer.name,null);
     }
 
+    /******************************************
+    * 
+    * public void CreateCenario()
+    *		Signals the ScenarioManager to validate and create the next Scenario
+    *
+    * Parameters
+    *
+    * Return
+    *
+    * ***************************************/		
     public void CreateCenario()
     {
         print("GAMEMANAGER_CreateCenario");
         ScenarioManager.GetInstance().CheckNewScenario();
     }
-
+	
     public static GameManagerScript GetInstance()
     {
         if (gameManager != null)
@@ -114,6 +149,18 @@ public class GameManagerScript : MonoBehaviour {
         throw new System.Exception("gameManager = null");
     }
 
+    /******************************************
+    * 
+    * public void HitEnemy(GameObject player, GameObject enemy)
+    *		Signals the PBManager that the player hit the enemy, for statistical reference,
+    *		removes the enemy from the list, checks if a new scenario should be loaded,
+    *		and destryos the enemy GameObject;
+    *
+    * Parameters
+    *		int playerID - The number ID for the new player.
+    * Return
+    *
+    * ***************************************/		
     public void HitEnemy(GameObject player, GameObject enemy)
     {
         PlayerBehaviourManager.GetInstance().HitEnemy(player, enemy);
@@ -123,12 +170,32 @@ public class GameManagerScript : MonoBehaviour {
 
     }
 
+    /******************************************
+    * 
+    * public void BFGIOver()
+    *		Moves the game to the next stage;
+    *
+    * Parameters
+    *		
+    * Return
+    *
+    * ***************************************/		
     public void BFGIOver()
     {
         currentStage++;
         CreateCenario();
     }
 
+    /******************************************
+    * 
+    * public void PlayerTypeOver()
+    *		Moves the game to the next stage;
+    *
+    * Parameters
+    *		
+    * Return
+    *
+    * ***************************************/		
     public void PlayerTypeOver()
     {
         currentStage++;
