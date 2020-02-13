@@ -14,7 +14,17 @@ public class PlayerMovementScript : MonoBehaviour {
     {
         lastStunned = -GameManagerScript.GetInstance().playerStunLength;
     }
-
+	/******************************************
+	* 
+	* public virtual void FixedUpdate()
+	*		Handles the players movement inputs. Handles player movement speed power up
+    *       and stun durations 
+	*
+	* Parameters
+	*
+	* Return
+	*
+	* ***************************************/
     public virtual void FixedUpdate()
     {
         if (Time.time - lastStunned < GameManagerScript.GetInstance().playerStunLength)
@@ -48,6 +58,16 @@ public class PlayerMovementScript : MonoBehaviour {
         }   
     }
 
+	/******************************************
+	* 
+	* private void OnCollisionEnter2D(Collision2D collision)
+	*		If the player collides with an Item, activates the powerUp
+	*
+	* Parameters
+	*       Collision2D collision - Unity default parameter
+	* Return
+	*
+	* ***************************************/    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Item")
