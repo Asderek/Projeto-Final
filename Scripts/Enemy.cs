@@ -23,6 +23,16 @@ public class Enemy : MonoBehaviour {
         transform.position = new Vector3 (transform.position.x, transform.position.y, -0.5f);
 	}
 
+    /******************************************
+    * 
+    * private void LateUpdate()
+    *		At the end of the interaction, recalculates the current target priority
+    *
+    * Parameters
+    *
+    * Return
+    *
+    * ***************************************/	
     private void LateUpdate()
     {
 
@@ -105,6 +115,16 @@ public class Enemy : MonoBehaviour {
         return ret;
     }
 
+    /******************************************
+    * 
+    * public virtual void FixedUpdate()
+    *		At a specified interval, move the enemy closer to its target
+    *
+    * Parameters
+    *
+    * Return
+    *
+    * ***************************************/		
     public virtual void FixedUpdate()
     {
         foreach (GameObject player in GameManagerScript.GetInstance().players)
@@ -160,6 +180,17 @@ public class Enemy : MonoBehaviour {
         // else roam
     }
 
+    /******************************************
+    * 
+    * private void OnCollisionEnter2D(Collision2D collision)
+    *	If the enemy collides with a victim, signals the scenarioManager to destroy that victim
+    *	If the enemy collides with a player, signals the player to receive damage.
+    *
+    * Parameters
+    *	Collision2D collision - Default unity parameter.
+    * Return
+    *
+    * ***************************************/		
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Victim")
@@ -172,6 +203,16 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    /******************************************
+    * 
+    * private void OnTriggerEnter2D(Collider2D collision)
+    *	If the enemy collides with a player, signals the gameManager to handle the logistics of hitting enemy.
+    *
+    * Parameters
+    *	Collider2D collision - Default unity parameter.
+    * Return
+    *
+    * ***************************************/	
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
